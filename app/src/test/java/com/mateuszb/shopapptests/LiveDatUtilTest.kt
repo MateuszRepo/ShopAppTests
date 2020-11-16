@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException
     Gets the value of a LiveData or waits for it to have one, with a timeout
     For testing purpose
 */
-fun <T> LiveData<T>.getOrAwaitValue(
+fun <T> LiveData<T>.getOrAwaitValueTest(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
     afterObserve: () -> Unit = {}
@@ -21,7 +21,7 @@ fun <T> LiveData<T>.getOrAwaitValue(
         override fun onChanged(o: T?) {
             data = o
             latch.countDown()
-            this@getOrAwaitValue.removeObserver(this)
+            this@getOrAwaitValueTest.removeObserver(this)
         }
     }
     this.observeForever(observer)
